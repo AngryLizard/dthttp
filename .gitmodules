@@ -1,0 +1,3 @@
+[submodule "nodeJs/Dragotheria-Server"]
+	path = nodeJs/Dragotheria-Server
+	url = git@github.com:Salireths/Dragotheria-Server.git
