@@ -1,8 +1,8 @@
 
-[gd_resource type="Resource" script_class="DTActorAsset" load_steps=2 format=3 uid="uid://2c75b6ff273a"]
+[gd_resource type="Resource" script_class="DTActorAsset" load_steps=2 format=3 uid="uid://4d09442e170b"]
 
-[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_actor_asset.gd" id="1_23749"]
+[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_actor_asset.gd" id="1_71e45"]
 
 [resource]
-script = ExtResource("1_23749")
+script = ExtResource("1_71e45")
 path = "type.entity.actor.character.kirin"

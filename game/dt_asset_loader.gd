@@ -1,3 +1,4 @@
+class_name DTAssetLoader
 extends Node
 
 var _assets = {}

@@ -1,8 +1,8 @@
 
-[gd_resource type="Resource" script_class="DTLevelAsset" load_steps=2 format=3 uid="uid://a20802f6a671"]
+[gd_resource type="Resource" script_class="DTLevelAsset" load_steps=2 format=3 uid="uid://e220e383af71"]
 
-[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_level_asset.gd" id="1_bdb4b"]
+[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_level_asset.gd" id="1_c3664"]
 
 [resource]
-script = ExtResource("1_bdb4b")
+script = ExtResource("1_c3664")
 path = "type.entity.world.testLevel"

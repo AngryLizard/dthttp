@@ -1,8 +1,8 @@
 
-[gd_resource type="Resource" script_class="DTFactoryAsset" load_steps=2 format=3 uid="uid://eb89b30bc1ce"]
+[gd_resource type="Resource" script_class="DTFactoryAsset" load_steps=2 format=3 uid="uid://a77756e52e19"]
 
-[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_factory_asset.gd" id="1_abc0a"]
+[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_factory_asset.gd" id="1_ae58b"]
 
 [resource]
-script = ExtResource("1_abc0a")
+script = ExtResource("1_ae58b")
 path = "type.factory.character"

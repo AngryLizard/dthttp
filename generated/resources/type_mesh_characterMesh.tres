@@ -1,8 +1,8 @@
 
-[gd_resource type="Resource" script_class="DTSkeletalMeshAsset" load_steps=2 format=3 uid="uid://5a63abab9299"]
+[gd_resource type="Resource" script_class="DTSkeletalMeshAsset" load_steps=2 format=3 uid="uid://5de31c0bf17d"]
 
-[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_skeletal_mesh_asset.gd" id="1_df038"]
+[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_skeletal_mesh_asset.gd" id="1_e93b9"]
 
 [resource]
-script = ExtResource("1_df038")
+script = ExtResource("1_e93b9")
 path = "type.mesh.characterMesh"

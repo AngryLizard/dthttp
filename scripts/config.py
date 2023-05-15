@@ -19,7 +19,7 @@ typeAssignments = {
 	"Type":                 ["String",                  "Type"],
 }
 
-dtHttpPath = "../NodeJS/Dragotheria-Server"
+dtHttpPath = "../nodeJs/Dragotheria-Server"
 
 def getPropGType(prop):
 	typeName = "String"

@@ -85,22 +85,34 @@ static func propValTo{type}(string: String) -> DT{type}Asset:
 	return DTAssetLoader.getAsset(string) as DT{type}Asset
 '''
 
-assetsProps += f'''
-static func addAssetTypes(plugin: EditorPlugin):'''
-for type in sourceJson['types']:
-	snake = snake_case(type)
-	assetsProps += f'''
-	plugin.add_custom_type("DT{type}Asset", "Resource", preload("assets/dt_{snake}_asset.gd"), null)'''
-
-assetsProps += f'''
-
-static func removeAssetTypes(plugin: EditorPlugin):'''
-for type in sourceJson['types']:
-	assetsProps += f'''
-	plugin.remove_custom_type("DT{type}Asset")'''
-
 assetsTargetPath = os.path.join(targetPath, f"dt_asset_property.gd")
 f = open(assetsTargetPath, "w")
 f.write(assetsProps)
+f.close()
+print(f'Generated asset properties to {assetsTargetPath}')
+
+# Print asset properties
+assetsRegister = f'''
+class_name DTAssetRegister
+extends Object
+'''
+
+assetsRegister += f'''
+static func addAssetTypes(plugin: EditorPlugin):'''
+for type in sourceJson['types']:
+	snake = snake_case(type)
+	assetsRegister += f'''
+	plugin.add_custom_type("DT{type}Asset", "Resource", preload("assets/dt_{snake}_asset.gd"), null)'''
+
+assetsRegister += f'''
+
+static func removeAssetTypes(plugin: EditorPlugin):'''
+for type in sourceJson['types']:
+	assetsRegister += f'''
+	plugin.remove_custom_type("DT{type}Asset")'''
+
+assetsTargetPath = os.path.join(targetPath, f"dt_asset_register.gd")
+f = open(assetsTargetPath, "w")
+f.write(assetsRegister)
 f.close()
 print(f'Generated asset properties to {assetsTargetPath}')
