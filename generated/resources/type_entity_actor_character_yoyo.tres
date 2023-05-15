@@ -1,0 +1,8 @@
+
+[gd_resource type="Resource" script_class="DTActorAsset" load_steps=2 format=3 uid="uid://922541006cf3"]
+
+[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_actor_asset.gd" id="1_8fe2e"]
+
+[resource]
+script = ExtResource("1_8fe2e")
+path = "type.entity.actor.character.yoyo"

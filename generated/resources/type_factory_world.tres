@@ -1,0 +1,8 @@
+
+[gd_resource type="Resource" script_class="DTFactoryAsset" load_steps=2 format=3 uid="uid://5ec8446051b9"]
+
+[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_factory_asset.gd" id="1_77f81"]
+
+[resource]
+script = ExtResource("1_77f81")
+path = "type.factory.world"
