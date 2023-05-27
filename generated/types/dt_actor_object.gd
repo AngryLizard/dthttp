@@ -42,16 +42,16 @@ func getActor() -> DTActorAsset:
 
 func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "transform":
-		_transformProperty.push(DTProperty.propValToTransform(propVal), timestamp, duration)
+		_transformProperty.push(DTPropertyParser.propValToTransform(propVal), timestamp, duration)
 		return true;
 	if propReg == "msg":
-		_msgProperty.push(DTProperty.propValToString(propVal), timestamp, duration)
+		_msgProperty.push(DTPropertyParser.propValToString(propVal), timestamp, duration)
 		return true;
 	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
 
 func _pushAttributeValue(propReg: String, propVal: String) -> bool:
 	if propReg == "actor":
-		_actorAttribute = DTProperty.propValToActorAsset(propVal)
+		_actorAttribute = DTPropertyParser.propValToActorAsset(propVal)
 		return true;
 	return super._pushAttributeValue(propReg, propVal)
 
@@ -59,6 +59,6 @@ func _getType() -> String:
 	return "Actor"
 
 func _ready():
-	_transformProperty = DTTimeline.new(DTProperty.propValToTransform("(0, 0, 0)"))
-	_msgProperty = DTTimeline.new(DTProperty.propValToString(""))
-	_actorAttribute = DTProperty.propValToActorAsset("")
+	_transformProperty = DTTimeline.new(DTPropertyParser.propValToTransform("(0, 0, 0)"))
+	_msgProperty = DTTimeline.new(DTPropertyParser.propValToString(""))
+	_actorAttribute = DTPropertyParser.propValToActorAsset("")

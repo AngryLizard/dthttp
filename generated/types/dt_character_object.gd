@@ -36,10 +36,10 @@ func getMesh(timestamp: int) -> Dictionary:
 
 func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "health":
-		_healthProperty.push(DTProperty.propValToFloat(propVal), timestamp, duration)
+		_healthProperty.push(DTPropertyParser.propValToFloat(propVal), timestamp, duration)
 		return true;
 	if propReg == "mesh":
-		_meshProperty.push(DTProperty.propValToSkeletalMeshAsset(propVal), timestamp, duration)
+		_meshProperty.push(DTPropertyParser.propValToSkeletalMeshAsset(propVal), timestamp, duration)
 		return true;
 	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
 
@@ -50,5 +50,5 @@ func _getType() -> String:
 	return "Character"
 
 func _ready():
-	_healthProperty = DTTimeline.new(DTProperty.propValToFloat("100"))
-	_meshProperty = DTTimeline.new(DTProperty.propValToSkeletalMeshAsset(""))
+	_healthProperty = DTTimeline.new(DTPropertyParser.propValToFloat("100"))
+	_meshProperty = DTTimeline.new(DTPropertyParser.propValToSkeletalMeshAsset(""))

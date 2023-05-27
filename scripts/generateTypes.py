@@ -82,7 +82,7 @@ func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, durat
 		if prop['isPublic']:
 			objectsData += f'''
 	if propReg == "{prop['propKey']}":
-		_{propKey}Property.push(DTProperty.propValTo{gName}(propVal), timestamp, duration)
+		_{propKey}Property.push(DTPropertyParser.propValTo{gName}(propVal), timestamp, duration)
 		return true;'''
 
 	objectsData += f'''
@@ -100,7 +100,7 @@ func _pushAttributeValue(propReg: String, propVal: String) -> bool:'''
 		if attr['isPublic']:
 			objectsData += f'''
 	if propReg == "{attr['propKey']}":
-		_{propKey}Attribute = DTProperty.propValTo{gName}(propVal)
+		_{propKey}Attribute = DTPropertyParser.propValTo{gName}(propVal)
 		return true;'''
 
 	objectsData += f'''
@@ -125,7 +125,7 @@ func _ready():'''
 			gName = getPropGName(prop['type'])
 			propKey = prop['propKey']
 			objectsData += f'''
-	_{propKey}Property = DTTimeline.new(DTProperty.propValTo{gName}("{prop['initial']}"))'''
+	_{propKey}Property = DTTimeline.new(DTPropertyParser.propValTo{gName}("{prop['initial']}"))'''
 
 	# Write attribute defaults
 	for attr in type['attrs']:
@@ -136,7 +136,7 @@ func _ready():'''
 			gName = getPropGName(attr['type'])
 			propKey = attr['propKey']
 			objectsData += f'''
-	_{propKey}Attribute = DTProperty.propValTo{gName}("{attr['initial']}")'''
+	_{propKey}Attribute = DTPropertyParser.propValTo{gName}("{attr['initial']}")'''
 
 	if not hasEntry:
 		objectsData += f'''

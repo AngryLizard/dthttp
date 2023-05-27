@@ -27,29 +27,32 @@ func _getUrl(endpoint: String, params: Dictionary, queries: Dictionary):
 			query += _getQuery(query, key, queries[key])
 	return "%s%s%s" % [_domain, endpoint.format(params), query]
 
-func _createRequest(callback: Callable):
+func _createRequest(onSuccess: Callable, onError: Callable):
 	var httpRequest = HTTPRequest.new()
 	add_child(httpRequest)
-	httpRequest.request_completed.connect(_on_request_completed.bind(httpRequest, callback))
+	httpRequest.request_completed.connect(_on_request_completed.bind(httpRequest, onSuccess, onError))
 	return httpRequest
 
-func _on_request_completed(result, response_code, headers, body, httpRequest, callback):
-	var json = JSON.parse_string(body.get_string_from_utf8())
-	if callback:
-		callback.call(json)
+func _on_request_completed(result, response_code, headers, body, httpRequest, onSuccess, onError):
+	if response_code == 200:
+		var json = JSON.parse_string(body.get_string_from_utf8())
+		if onSuccess:
+			onSuccess.call(json)
+	elif onError:
+		onError.call(response_code, body.get_string_from_utf8())
 	httpRequest.queue_free()
 
 func authenticate(token: String):
 	_token = token
 
-func requestGet(endpoint: String, params: Dictionary, queries: Dictionary, callback: Callable):
-	_createRequest(callback).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_GET)
+func requestGet(endpoint: String, params: Dictionary, queries: Dictionary, onSuccess: Callable, onError: Callable):
+	_createRequest(onSuccess, onError).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_GET)
 
-func requestPost(endpoint: String, params: Dictionary, queries: Dictionary, body: Dictionary, callback: Callable):
-	_createRequest(callback).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_POST, JSON.stringify(body))
+func requestPost(endpoint: String, params: Dictionary, queries: Dictionary, body: Dictionary, onSuccess: Callable, onError: Callable):
+	_createRequest(onSuccess, onError).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_POST, JSON.stringify(body))
 
-func requestPut(endpoint: String, params: Dictionary, queries: Dictionary, body: Dictionary, callback: Callable):
-	_createRequest(callback).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_PUT, JSON.stringify(body))
+func requestPut(endpoint: String, params: Dictionary, queries: Dictionary, body: Dictionary, onSuccess: Callable, onError: Callable):
+	_createRequest(onSuccess, onError).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_PUT, JSON.stringify(body))
 
-func requestDelete(endpoint: String, params: Dictionary, queries: Dictionary, callback: Callable):
-	_createRequest(callback).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_DELETE)
+func requestDelete(endpoint: String, params: Dictionary, queries: Dictionary, onSuccess: Callable, onError: Callable):
+	_createRequest(onSuccess, onError).request(_getUrl(endpoint, params, queries), _getHeader(), HTTPClient.METHOD_DELETE)

@@ -20,7 +20,7 @@ func getActive(timestamp: int) -> Dictionary:
 
 func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "active":
-		_activeProperty.push(DTProperty.propValToBool(propVal), timestamp, duration)
+		_activeProperty.push(DTPropertyParser.propValToBool(propVal), timestamp, duration)
 		return true;
 	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
 
@@ -31,4 +31,4 @@ func _getType() -> String:
 	return "Spawner"
 
 func _ready():
-	_activeProperty = DTTimeline.new(DTProperty.propValToBool("true"))
+	_activeProperty = DTTimeline.new(DTPropertyParser.propValToBool("true"))

@@ -1,8 +1,7 @@
+[gd_resource type="Resource" script_class="DTActorAsset" load_steps=2 format=3 uid="uid://dlhr8odruvc10"]
 
-[gd_resource type="Resource" script_class="DTActorAsset" load_steps=2 format=3 uid="uid://ddd9371e6aaf"]
-
-[ext_resource type="Script" path="res://addons/dthttp/generated/assets/dt_actor_asset.gd" id="1_940ec"]
+[ext_resource type="Script" path="res://addons/dthttp/assets/dt_actor_asset.gd" id="1_bcd06"]
 
 [resource]
-script = ExtResource("1_940ec")
+script = ExtResource("1_bcd06")
 path = "type.entity.actor.box"

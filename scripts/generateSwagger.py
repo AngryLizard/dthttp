@@ -189,7 +189,8 @@ for pathName, path in sourceJson['paths'].items():
         apiParams = functionParams
         if hasBody:
             apiParams.append("body: Dictionary")
-        apiParams.append("callback: Callable")
+        apiParams.append("onSuccess: Callable")
+        apiParams.append("onError: Callable")
         functionParamString = ", ".join(apiParams)
 
         apiData += f'''
@@ -197,7 +198,7 @@ for pathName, path in sourceJson['paths'].items():
 func {functionName}({functionParamString}):
     var params = {{{functionParamArgsString}}}
     var queries = {{{functionParamQueriesString}}}
-    return request{httpVerb.capitalize()}("{pathName}", params, queries{", body" if hasBody else ""}, callback)
+    return request{httpVerb.capitalize()}("{pathName}", params, queries{", body" if hasBody else ""}, onSuccess, onError)
 '''
 
 apiTargetPath = os.path.join(targetPath, "dt_api.gd")

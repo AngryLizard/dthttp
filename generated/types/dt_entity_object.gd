@@ -52,13 +52,13 @@ func getScene(timestamp: int) -> Dictionary:
 
 func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "displayName":
-		_displayNameProperty.push(DTProperty.propValToString(propVal), timestamp, duration)
+		_displayNameProperty.push(DTPropertyParser.propValToString(propVal), timestamp, duration)
 		return true;
 	if propReg == "parent":
-		_parentProperty.push(DTProperty.propValToEntityRef(propVal), timestamp, duration)
+		_parentProperty.push(DTPropertyParser.propValToEntityRef(propVal), timestamp, duration)
 		return true;
 	if propReg == "scene":
-		_sceneProperty.push(DTProperty.propValToSceneReg(propVal), timestamp, duration)
+		_sceneProperty.push(DTPropertyParser.propValToSceneReg(propVal), timestamp, duration)
 		return true;
 	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
 
@@ -69,6 +69,6 @@ func _getType() -> String:
 	return "Entity"
 
 func _ready():
-	_displayNameProperty = DTTimeline.new(DTProperty.propValToString(""))
-	_parentProperty = DTTimeline.new(DTProperty.propValToEntityRef(""))
-	_sceneProperty = DTTimeline.new(DTProperty.propValToSceneReg(""))
+	_displayNameProperty = DTTimeline.new(DTPropertyParser.propValToString(""))
+	_parentProperty = DTTimeline.new(DTPropertyParser.propValToEntityRef(""))
+	_sceneProperty = DTTimeline.new(DTPropertyParser.propValToSceneReg(""))

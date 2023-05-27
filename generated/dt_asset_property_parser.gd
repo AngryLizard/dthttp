@@ -1,5 +1,5 @@
 
-class_name DTAssetProperty
+class_name DTAssetPropertyParser
 extends Object
 
 static func propValToFactory(string: String) -> DTFactoryAsset:

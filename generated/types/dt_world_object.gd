@@ -26,13 +26,13 @@ func getLevel() -> DTLevelAsset:
 
 func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "temperature":
-		_temperatureProperty.push(DTProperty.propValToFloat(propVal), timestamp, duration)
+		_temperatureProperty.push(DTPropertyParser.propValToFloat(propVal), timestamp, duration)
 		return true;
 	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
 
 func _pushAttributeValue(propReg: String, propVal: String) -> bool:
 	if propReg == "level":
-		_levelAttribute = DTProperty.propValToLevelAsset(propVal)
+		_levelAttribute = DTPropertyParser.propValToLevelAsset(propVal)
 		return true;
 	return super._pushAttributeValue(propReg, propVal)
 
@@ -40,5 +40,5 @@ func _getType() -> String:
 	return "World"
 
 func _ready():
-	_temperatureProperty = DTTimeline.new(DTProperty.propValToFloat(""))
-	_levelAttribute = DTProperty.propValToLevelAsset("")
+	_temperatureProperty = DTTimeline.new(DTPropertyParser.propValToFloat(""))
+	_levelAttribute = DTPropertyParser.propValToLevelAsset("")

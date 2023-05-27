@@ -1,12 +1,24 @@
-class_name DTAssetLoader
 extends Node
 
 var _assets = {}
 
 func _ready():
-	load_assets_from_folder(get_script().resource_path.get_base_dir() + "/../generated/resources/")
+	#_loadAssetsFromFolder(get_script().resource_path.get_base_dir() + "/../generated/resources/")
+	pass
+	
+func addAsset(asset: DTAsset):
+	if asset.path.is_empty():
+		print("Attempted to add asset with empty path")
+		return
+		
+	print("Added asset %s" % [asset.path])
+	_assets[asset.path] = asset
+	
+func addAssets(assets: Array):
+	for asset in assets:
+		addAsset(asset as DTAsset)
 
-func load_assets_from_folder(folder_path: String) -> void:
+func loadAssetsFromFolder(folder_path: String) -> void:
 	var dir = DirAccess.open(folder_path)
 	dir.list_dir_begin()
 	var filename = dir.get_next()
@@ -17,11 +29,9 @@ func load_assets_from_folder(folder_path: String) -> void:
 			var path = folder_path + filename
 			var asset = load(path) as DTAsset
 			if asset:
-				print("Loaded asset %s" % [asset.path])
-				_assets[asset.path] = asset
+				addAsset(asset)
 		filename = dir.get_next()
 	dir.list_dir_end()
 
 func getAsset(path: String):
-	var assetLoader = get_tree().get_root().get_node("dt_asset_loader")
-	return assetLoader._assets[path] if path in assetLoader._assets else null
+	return _assets[path] if path in _assets else null

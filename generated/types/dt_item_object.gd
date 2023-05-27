@@ -20,7 +20,7 @@ func getWeight(timestamp: int) -> Dictionary:
 
 func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "weight":
-		_weightProperty.push(DTProperty.propValToFloat(propVal), timestamp, duration)
+		_weightProperty.push(DTPropertyParser.propValToFloat(propVal), timestamp, duration)
 		return true;
 	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
 
@@ -31,4 +31,4 @@ func _getType() -> String:
 	return "Item"
 
 func _ready():
-	_weightProperty = DTTimeline.new(DTProperty.propValToFloat("10"))
+	_weightProperty = DTTimeline.new(DTPropertyParser.propValToFloat("10"))
