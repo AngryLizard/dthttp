@@ -11,8 +11,10 @@ func _enter_tree():
 	add_custom_type("DTTextureAsset", "Resource", preload("assets/dt_texture_asset.gd"), null)
 	add_custom_type("DTAnimationAsset", "Resource", preload("assets/dt_animation_asset.gd"), null)
 	add_autoload_singleton("DTAssetLoader", get_script().resource_path.get_base_dir() + "/game/dt_asset_loader.gd")
+	add_autoload_singleton("DTClient", get_script().resource_path.get_base_dir() + "/dt_client.gd")
 
 func _exit_tree():
+	remove_autoload_singleton("DTClient")
 	remove_autoload_singleton("DTAssetLoader")
 	remove_custom_type("DTFactoryAsset")
 	remove_custom_type("DTLevelAsset")

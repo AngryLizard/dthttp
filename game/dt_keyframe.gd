@@ -11,25 +11,25 @@ func _init(value: Variant = null, timestamp: int = 0, duration: float = 1.0):
 	_timestamp = timestamp
 	_duration = duration
 
-func isBefore(timestamp: int):
+func is_before(timestamp: int):
 	return _timestamp < timestamp
 
 ## Get value of this keyframe
-func getValue():
+func get_value():
 	return _value
 
 ## Get previous value of this keyframe
-func getPrevious():
+func get_previous():
 	return _previous
 
 ## Get alpha lerp value between this keyframe and timestamp
-func getAlpha(timestamp: int) -> float:
+func get_alpha(timestamp: int) -> float:
 	if _duration < 0.001:
 		return 1.0 if timestamp > _timestamp else 0.0
 	return clamp((timestamp - _timestamp) * (1000.0 / _duration), 0.0, 1.0);
 
 ## Convert datetime string to milliseconds integer
-static func stringToTimestamp(dateTime: String) -> int:
+static func string_to_timestamp(dateTime: String) -> int:
 	var split = dateTime.split(".")
 	var seconds = Time.get_unix_time_from_datetime_string(split[0])
 	var milliseconds = int(split[1])

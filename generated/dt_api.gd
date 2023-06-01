@@ -2,6 +2,9 @@
 class_name DTAPI
 extends DTRequester
 
+func _init(domain: String = ""):
+	super._init(domain)
+
 ## 
 ##	return: Array[Dictionary]
 ##		typeReg: String
@@ -18,7 +21,7 @@ extends DTRequester
 ##			desc: String
 ##			type: String
 ##			initial: String
-func getGameTypes(onSuccess: Callable, onError: Callable):
+func get_game_types(onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestGet("/game/Types", params, queries, onSuccess, onError)
@@ -35,7 +38,7 @@ func getGameTypes(onSuccess: Callable, onError: Callable):
 ##			desc: String
 ##			type: String
 ##			initial: String
-func getGameActions(onSuccess: Callable, onError: Callable):
+func get_game_actions(onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestGet("/game/Actions", params, queries, onSuccess, onError)
@@ -50,7 +53,7 @@ func getGameActions(onSuccess: Callable, onError: Callable):
 ##		attributes: Array[Dictionary] // Attributes of this entity
 ##			propReg: String // Property name, should correspond to an attribute in the entity type
 ##			propVal: String // Property value whose format corresponds to property type assigned by propKey
-func getGameEntityListWith(typeReg:String, onSuccess: Callable, onError: Callable):
+func get_game_entity_list_with(typeReg:String, onSuccess: Callable, onError: Callable):
 	var params = {"typeReg": str(typeReg)}
 	var queries = {}
 	return requestGet("/game/entity/list/{typeReg}", params, queries, onSuccess, onError)
@@ -61,7 +64,7 @@ func getGameEntityListWith(typeReg:String, onSuccess: Callable, onError: Callabl
 ##		name: String
 ##		isPublic: bool
 ##	return: String
-func postGameEntityWith(typeReg:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_game_entity_with(typeReg:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"typeReg": str(typeReg)}
 	var queries = {}
 	return requestPost("/game/entity/{typeReg}", params, queries, body, onSuccess, onError)
@@ -71,7 +74,7 @@ func postGameEntityWith(typeReg:String, body: Dictionary, onSuccess: Callable, o
 ##	body: Dictionary
 ##		name: String
 ##		isPublic: bool
-func putGameEntityWith(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func put_game_entity_with(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef)}
 	var queries = {}
 	return requestPut("/game/entity/{entityRef}", params, queries, body, onSuccess, onError)
@@ -86,14 +89,14 @@ func putGameEntityWith(entityRef:String, body: Dictionary, onSuccess: Callable, 
 ##		attributes: Array[Dictionary] // Attributes of this entity
 ##			propReg: String // Property name, should correspond to an attribute in the entity type
 ##			propVal: String // Property value whose format corresponds to property type assigned by propKey
-func getGameEntityWith(entityRef:String, onSuccess: Callable, onError: Callable):
+func get_game_entity_with(entityRef:String, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef)}
 	var queries = {}
 	return requestGet("/game/entity/{entityRef}", params, queries, onSuccess, onError)
 
 ## 
 ##	entityRef: String
-func deleteGameEntityWith(entityRef:String, onSuccess: Callable, onError: Callable):
+func delete_game_entity_with(entityRef:String, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef)}
 	var queries = {}
 	return requestDelete("/game/entity/{entityRef}", params, queries, onSuccess, onError)
@@ -108,7 +111,7 @@ func deleteGameEntityWith(entityRef:String, onSuccess: Callable, onError: Callab
 ##		attributes: Array[Dictionary] // Attributes of this entity
 ##			propReg: String // Property name, should correspond to an attribute in the entity type
 ##			propVal: String // Property value whose format corresponds to property type assigned by propKey
-func getGameListEntities(entityRefs:Array[String], onSuccess: Callable, onError: Callable):
+func get_game_list_entities(entityRefs:Array[String], onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {"entityRefs": str(entityRefs)}
 	return requestGet("/game/list/entities", params, queries, onSuccess, onError)
@@ -117,7 +120,7 @@ func getGameListEntities(entityRefs:Array[String], onSuccess: Callable, onError:
 ##	entityRef: String
 ##	body: Dictionary
 ##		playerRefs: Array[String]
-func putGameEntityWithOwnership(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func put_game_entity_with_ownership(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef)}
 	var queries = {}
 	return requestPut("/game/entity/{entityRef}/ownership", params, queries, body, onSuccess, onError)
@@ -128,7 +131,7 @@ func putGameEntityWithOwnership(entityRef:String, body: Dictionary, onSuccess: C
 ##	body: Dictionary
 ##		name: String
 ##	return: String
-func postGameEntityWithSceneWith(entityRef:String, sceneReg:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_game_entity_with_scene_with(entityRef:String, sceneReg:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef),
 		"sceneReg": str(sceneReg)}
 	var queries = {}
@@ -137,7 +140,7 @@ func postGameEntityWithSceneWith(entityRef:String, sceneReg:String, body: Dictio
 ## 
 ##	entityRef: String
 ##	sceneReg: String
-func deleteGameEntityWithSceneWith(entityRef:String, sceneReg:String, onSuccess: Callable, onError: Callable):
+func delete_game_entity_with_scene_with(entityRef:String, sceneReg:String, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef),
 		"sceneReg": str(sceneReg)}
 	var queries = {}
@@ -150,7 +153,7 @@ func deleteGameEntityWithSceneWith(entityRef:String, sceneReg:String, onSuccess:
 ##	return: Dictionary
 ##		token: String
 ##		playerRef: String
-func postPlayerLogin(body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_player_login(body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestPost("/player/login", params, queries, body, onSuccess, onError)
@@ -161,7 +164,7 @@ func postPlayerLogin(body: Dictionary, onSuccess: Callable, onError: Callable):
 ##		password: String
 ##		nickname: String
 ##	return: String
-func postPlayerRegister(body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_player_register(body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestPost("/player/register", params, queries, body, onSuccess, onError)
@@ -172,7 +175,7 @@ func postPlayerRegister(body: Dictionary, onSuccess: Callable, onError: Callable
 ##		password: String
 ##		nickname: String
 ##	return: String
-func postPlayer(body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_player(body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestPost("/player", params, queries, body, onSuccess, onError)
@@ -183,7 +186,7 @@ func postPlayer(body: Dictionary, onSuccess: Callable, onError: Callable):
 ##		nickname: String // Displayed player name
 ##		access: int // Displayed role
 ##		username: String // Displayed user name
-func getPlayer(onSuccess: Callable, onError: Callable):
+func get_player(onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestGet("/player", params, queries, onSuccess, onError)
@@ -193,13 +196,13 @@ func getPlayer(onSuccess: Callable, onError: Callable):
 ##		username: String
 ##		password: String
 ##		nickname: String
-func putPlayer(body: Dictionary, onSuccess: Callable, onError: Callable):
+func put_player(body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestPut("/player", params, queries, body, onSuccess, onError)
 
 ## Removes calling player from server.
-func deletePlayer(onSuccess: Callable, onError: Callable):
+func delete_player(onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestDelete("/player", params, queries, onSuccess, onError)
@@ -210,7 +213,7 @@ func deletePlayer(onSuccess: Callable, onError: Callable):
 ##		ref: String // ID of this player
 ##		nickname: String // Displayed player name
 ##		access: int // Displayed role
-func getPlayerWith(playerRef:String, onSuccess: Callable, onError: Callable):
+func get_player_with(playerRef:String, onSuccess: Callable, onError: Callable):
 	var params = {"playerRef": str(playerRef)}
 	var queries = {}
 	return requestGet("/player/{playerRef}", params, queries, onSuccess, onError)
@@ -221,14 +224,14 @@ func getPlayerWith(playerRef:String, onSuccess: Callable, onError: Callable):
 ##		username: String
 ##		password: String
 ##		nickname: String
-func putPlayerWith(playerRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func put_player_with(playerRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"playerRef": str(playerRef)}
 	var queries = {}
 	return requestPut("/player/{playerRef}", params, queries, body, onSuccess, onError)
 
 ## Removes a player from this server. Users that are moderators or admins cannot be removed and must be demoted first.
 ##	playerRef: String
-func deletePlayerWith(playerRef:String, onSuccess: Callable, onError: Callable):
+func delete_player_with(playerRef:String, onSuccess: Callable, onError: Callable):
 	var params = {"playerRef": str(playerRef)}
 	var queries = {}
 	return requestDelete("/player/{playerRef}", params, queries, onSuccess, onError)
@@ -236,7 +239,7 @@ func deletePlayerWith(playerRef:String, onSuccess: Callable, onError: Callable):
 ## 
 ##	playerRef: String
 ##	query: String
-func putPlayerWithWith(playerRef:String, query:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func put_player_with_with(playerRef:String, query:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"playerRef": str(playerRef),
 		"query": str(query)}
 	var queries = {}
@@ -246,13 +249,13 @@ func putPlayerWithWith(playerRef:String, query:String, body: Dictionary, onSucce
 ##	body: Dictionary
 ##		entityRefs: Array[String]
 ##	return: String
-func postSessionStart(body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_session_start(body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestPost("/session/start", params, queries, body, onSuccess, onError)
 
 ## Subscribe to timeline changes (SSE).
-func getSessionEventsWith(onSuccess: Callable, onError: Callable):
+func get_session_events_with(onSuccess: Callable, onError: Callable):
 	var params = {}
 	var queries = {}
 	return requestGet("/session/events/{sessionRef}", params, queries, onSuccess, onError)
@@ -269,7 +272,7 @@ func getSessionEventsWith(onSuccess: Callable, onError: Callable):
 ##			duration: float
 ##			propVal: String
 ##		timestamp: String
-func postSessionUpdateWithFromWithWith(sessionRef:String, date:String, query:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_session_update_with_from_with_with(sessionRef:String, date:String, query:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"sessionRef": str(sessionRef),
 		"date": str(date),
 		"query": str(query)}
@@ -288,7 +291,7 @@ func postSessionUpdateWithFromWithWith(sessionRef:String, date:String, query:Str
 ##			duration: float
 ##			propVal: String
 ##		timestamp: String
-func getSessionSpectateWithFromWithWith(entityRef:String, date:String, query:String, onSuccess: Callable, onError: Callable):
+func get_session_spectate_with_from_with_with(entityRef:String, date:String, query:String, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef),
 		"date": str(date),
 		"query": str(query)}
@@ -297,7 +300,7 @@ func getSessionSpectateWithFromWithWith(entityRef:String, date:String, query:Str
 
 ## Stop a session. This should be called once player disconnects.
 ##	sessionRef: String
-func deleteSessionStopWith(sessionRef:String, onSuccess: Callable, onError: Callable):
+func delete_session_stop_with(sessionRef:String, onSuccess: Callable, onError: Callable):
 	var params = {"sessionRef": str(sessionRef)}
 	var queries = {}
 	return requestDelete("/session/stop/{sessionRef}", params, queries, onSuccess, onError)
@@ -307,7 +310,7 @@ func deleteSessionStopWith(sessionRef:String, onSuccess: Callable, onError: Call
 ##	body: Dictionary
 ##		message: String // Post dialogue from calling entity
 ##		speed: float // Post dialogue from calling entity
-func postActionWithDialogue(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_action_with_dialogue(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef)}
 	var queries = {}
 	return requestPost("/action/{entityId}/Dialogue", params, queries, body, onSuccess, onError)
@@ -317,7 +320,7 @@ func postActionWithDialogue(entityRef:String, body: Dictionary, onSuccess: Calla
 ##	body: Dictionary
 ##		target: string // Move calling entity
 ##		speed: float // Move calling entity
-func postActionWithMove(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_action_with_move(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef)}
 	var queries = {}
 	return requestPost("/action/{entityId}/Move", params, queries, body, onSuccess, onError)
@@ -326,7 +329,7 @@ func postActionWithMove(entityRef:String, body: Dictionary, onSuccess: Callable,
 ##	entityRef: String
 ##	body: Dictionary
 ##		spawnerId: string // Spawn calling entity
-func postActionWithSpawn(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
+func post_action_with_spawn(entityRef:String, body: Dictionary, onSuccess: Callable, onError: Callable):
 	var params = {"entityRef": str(entityRef)}
 	var queries = {}
 	return requestPost("/action/{entityId}/Spawn", params, queries, body, onSuccess, onError)

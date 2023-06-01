@@ -10,7 +10,7 @@ var _temperatureProperty: DTTimeline
 ##  previous: temperature property value before current value
 ##  value: Current/last temperature property value
 ##  alpha: Lerp ratio between previous and current temperature property value
-func getTemperature(timestamp: int) -> Dictionary:
+func prop_get_temperature(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _temperatureProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -21,22 +21,22 @@ func getTemperature(timestamp: int) -> Dictionary:
 var _levelAttribute: DTLevelAsset
 
 ## Get the value of the level attribute from this object
-func getLevel() -> DTLevelAsset:
+func attr_get_level() -> DTLevelAsset:
 	return _levelAttribute
 
-func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
+func _push_property_change(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "temperature":
 		_temperatureProperty.push(DTPropertyParser.propValToFloat(propVal), timestamp, duration)
 		return true;
-	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
+	return super._push_property_change(propReg, propVal, timestamp, duration)
 
-func _pushAttributeValue(propReg: String, propVal: String) -> bool:
+func _push_attribute_value(propReg: String, propVal: String) -> bool:
 	if propReg == "level":
 		_levelAttribute = DTPropertyParser.propValToLevelAsset(propVal)
 		return true;
-	return super._pushAttributeValue(propReg, propVal)
+	return super._push_attribute_value(propReg, propVal)
 
-func _getType() -> String:
+func _get_type() -> String:
 	return "World"
 
 func _ready():

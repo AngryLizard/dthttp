@@ -1,20 +1,20 @@
 class_name DTBaseObject
-extends Node
+extends Object
 
-func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
+func _push_property_change(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	return false
 
-func pushPropertyChange(change: Dictionary) -> bool:
-	return _pushPropertyChange(change["PropReg"], change["PropVal"],
+func push_property_change(change: Dictionary) -> bool:
+	return _push_property_change(change["PropReg"], change["PropVal"],
 		DTKeyframe.stringToTimestamp(change["Timestamp"]),
 		change["Duration"] as float)
 	
-func _pushAttributeValue(propReg: String, propVal: String) -> bool:
+func _push_attribute_value(propReg: String, propVal: String) -> bool:
 	return false
 
-func pushAttributeValue(value: Dictionary) -> bool:
-	return _pushAttributeValue(value["PropReg"], value["PropVal"])
+func push_attribute_value(value: Dictionary) -> bool:
+	return _push_attribute_value(value["PropReg"], value["PropVal"])
 
-func _getType() -> String:
+func _get_type() -> String:
 	return "Base"
 

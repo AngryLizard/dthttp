@@ -10,7 +10,7 @@ var _healthProperty: DTTimeline
 ##  previous: health property value before current value
 ##  value: Current/last health property value
 ##  alpha: Lerp ratio between previous and current health property value
-func getHealth(timestamp: int) -> Dictionary:
+func prop_get_health(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _healthProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -26,7 +26,7 @@ var _meshProperty: DTTimeline
 ##  previous: mesh property value before current value
 ##  value: Current/last mesh property value
 ##  alpha: Lerp ratio between previous and current mesh property value
-func getMesh(timestamp: int) -> Dictionary:
+func prop_get_mesh(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _meshProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -34,19 +34,19 @@ func getMesh(timestamp: int) -> Dictionary:
 	output["value"] = keyframe.Value
 	return output
 
-func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
+func _push_property_change(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "health":
 		_healthProperty.push(DTPropertyParser.propValToFloat(propVal), timestamp, duration)
 		return true;
 	if propReg == "mesh":
 		_meshProperty.push(DTPropertyParser.propValToSkeletalMeshAsset(propVal), timestamp, duration)
 		return true;
-	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
+	return super._push_property_change(propReg, propVal, timestamp, duration)
 
-func _pushAttributeValue(propReg: String, propVal: String) -> bool:
-	return super._pushAttributeValue(propReg, propVal)
+func _push_attribute_value(propReg: String, propVal: String) -> bool:
+	return super._push_attribute_value(propReg, propVal)
 
-func _getType() -> String:
+func _get_type() -> String:
 	return "Character"
 
 func _ready():

@@ -10,7 +10,7 @@ var _transformProperty: DTTimeline
 ##  previous: transform property value before current value
 ##  value: Current/last transform property value
 ##  alpha: Lerp ratio between previous and current transform property value
-func getTransform(timestamp: int) -> Dictionary:
+func prop_get_transform(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _transformProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -26,7 +26,7 @@ var _msgProperty: DTTimeline
 ##  previous: msg property value before current value
 ##  value: Current/last msg property value
 ##  alpha: Lerp ratio between previous and current msg property value
-func getMsg(timestamp: int) -> Dictionary:
+func prop_get_msg(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _msgProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -37,25 +37,25 @@ func getMsg(timestamp: int) -> Dictionary:
 var _actorAttribute: DTActorAsset
 
 ## Get the value of the actor attribute from this object
-func getActor() -> DTActorAsset:
+func attr_get_actor() -> DTActorAsset:
 	return _actorAttribute
 
-func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
+func _push_property_change(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "transform":
 		_transformProperty.push(DTPropertyParser.propValToTransform(propVal), timestamp, duration)
 		return true;
 	if propReg == "msg":
 		_msgProperty.push(DTPropertyParser.propValToString(propVal), timestamp, duration)
 		return true;
-	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
+	return super._push_property_change(propReg, propVal, timestamp, duration)
 
-func _pushAttributeValue(propReg: String, propVal: String) -> bool:
+func _push_attribute_value(propReg: String, propVal: String) -> bool:
 	if propReg == "actor":
 		_actorAttribute = DTPropertyParser.propValToActorAsset(propVal)
 		return true;
-	return super._pushAttributeValue(propReg, propVal)
+	return super._push_attribute_value(propReg, propVal)
 
-func _getType() -> String:
+func _get_type() -> String:
 	return "Actor"
 
 func _ready():

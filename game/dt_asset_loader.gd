@@ -6,7 +6,7 @@ func _ready():
 	#_loadAssetsFromFolder(get_script().resource_path.get_base_dir() + "/../generated/resources/")
 	pass
 	
-func addAsset(asset: DTAsset):
+func add_asset(asset: DTAsset):
 	if asset.path.is_empty():
 		print("Attempted to add asset with empty path")
 		return
@@ -14,11 +14,11 @@ func addAsset(asset: DTAsset):
 	print("Added asset %s" % [asset.path])
 	_assets[asset.path] = asset
 	
-func addAssets(assets: Array):
+func add_assets(assets: Array):
 	for asset in assets:
-		addAsset(asset as DTAsset)
+		add_asset(asset as DTAsset)
 
-func loadAssetsFromFolder(folder_path: String) -> void:
+func load_assets_from_folder(folder_path: String) -> void:
 	var dir = DirAccess.open(folder_path)
 	dir.list_dir_begin()
 	var filename = dir.get_next()
@@ -29,9 +29,14 @@ func loadAssetsFromFolder(folder_path: String) -> void:
 			var path = folder_path + filename
 			var asset = load(path) as DTAsset
 			if asset:
-				addAsset(asset)
+				add_asset(asset)
 		filename = dir.get_next()
 	dir.list_dir_end()
 
-func getAsset(path: String):
+func get_asset(path: String):
 	return _assets[path] if path in _assets else null
+
+enum Test {
+	BLAH,
+	COOCOO
+}

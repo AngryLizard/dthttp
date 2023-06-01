@@ -1,17 +1,10 @@
 import json
 import sys
 import os
-import glob
 import uuid
-from re import sub
 
 from config import dtHttpPath
-
-def snake_case(s):
-	return '_'.join(
-		sub('([A-Z][a-z]+)', r' \1',
-		sub('([A-Z]+)', r' \1',
-		s.replace('-', ' '))).split()).lower()
+from utils import snake_case
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -76,8 +69,9 @@ class_name DTAssetPropertyParser
 extends Object
 '''
 for type in sourceJson['types']:
+	snake = snake_case(type)
 	assetsProps += f'''
-static func propValTo{type}(string: String) -> DT{type}Asset:
+static func prop_val_to_{snake}(string: String) -> DT{type}Asset:
 	return DTAssetLoader.getAsset(string) as DT{type}Asset
 '''
 

@@ -10,7 +10,7 @@ var _displayNameProperty: DTTimeline
 ##  previous: displayName property value before current value
 ##  value: Current/last displayName property value
 ##  alpha: Lerp ratio between previous and current displayName property value
-func getDisplayName(timestamp: int) -> Dictionary:
+func prop_get_display_name(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _displayNameProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -26,7 +26,7 @@ var _parentProperty: DTTimeline
 ##  previous: parent property value before current value
 ##  value: Current/last parent property value
 ##  alpha: Lerp ratio between previous and current parent property value
-func getParent(timestamp: int) -> Dictionary:
+func prop_get_parent(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _parentProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -42,7 +42,7 @@ var _sceneProperty: DTTimeline
 ##  previous: scene property value before current value
 ##  value: Current/last scene property value
 ##  alpha: Lerp ratio between previous and current scene property value
-func getScene(timestamp: int) -> Dictionary:
+func prop_get_scene(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _sceneProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -50,7 +50,7 @@ func getScene(timestamp: int) -> Dictionary:
 	output["value"] = keyframe.Value
 	return output
 
-func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
+func _push_property_change(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "displayName":
 		_displayNameProperty.push(DTPropertyParser.propValToString(propVal), timestamp, duration)
 		return true;
@@ -60,12 +60,12 @@ func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, durat
 	if propReg == "scene":
 		_sceneProperty.push(DTPropertyParser.propValToSceneReg(propVal), timestamp, duration)
 		return true;
-	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
+	return super._push_property_change(propReg, propVal, timestamp, duration)
 
-func _pushAttributeValue(propReg: String, propVal: String) -> bool:
-	return super._pushAttributeValue(propReg, propVal)
+func _push_attribute_value(propReg: String, propVal: String) -> bool:
+	return super._push_attribute_value(propReg, propVal)
 
-func _getType() -> String:
+func _get_type() -> String:
 	return "Entity"
 
 func _ready():

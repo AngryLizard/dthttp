@@ -10,7 +10,7 @@ var _weightProperty: DTTimeline
 ##  previous: weight property value before current value
 ##  value: Current/last weight property value
 ##  alpha: Lerp ratio between previous and current weight property value
-func getWeight(timestamp: int) -> Dictionary:
+func prop_get_weight(timestamp: int) -> Dictionary:
 	var output = {}
 	var keyframe = _weightProperty.peek(timestamp)
 	output["alpha"] = keyframe.lerpTimestamp(timestamp)
@@ -18,16 +18,16 @@ func getWeight(timestamp: int) -> Dictionary:
 	output["value"] = keyframe.Value
 	return output
 
-func _pushPropertyChange(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
+func _push_property_change(propReg: String, propVal: String, timestamp: int, duration: float) -> bool:
 	if propReg == "weight":
 		_weightProperty.push(DTPropertyParser.propValToFloat(propVal), timestamp, duration)
 		return true;
-	return super._pushPropertyChange(propReg, propVal, timestamp, duration)
+	return super._push_property_change(propReg, propVal, timestamp, duration)
 
-func _pushAttributeValue(propReg: String, propVal: String) -> bool:
-	return super._pushAttributeValue(propReg, propVal)
+func _push_attribute_value(propReg: String, propVal: String) -> bool:
+	return super._push_attribute_value(propReg, propVal)
 
-func _getType() -> String:
+func _get_type() -> String:
 	return "Item"
 
 func _ready():
